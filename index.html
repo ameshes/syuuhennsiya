@@ -109,7 +109,7 @@
         background(255);
         fill(0);
         textSize(100);
-        text(countDown, 500/2 , 500/2);
+        text((int)countDown, 500/2 , 500/2);
       }
       if (millis() >= 5000 && millis() <= 5010) {
         baseTime = millis();
@@ -142,10 +142,10 @@
 
           //配列の数字をセルに表示
           fill(0);
-          textSize(80);
+          textSize(70);
           for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
-              text(n[i][j], centerX[i]-65, centerY[j]+40);
+              text(n[i][j], centerX[i]-20, centerY[j]+20);
             }
           }
           text("Time:" + (millis() - baseTime)/1000.0, width/2 - 100, 570);
