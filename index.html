@@ -142,10 +142,10 @@
 
           //配列の数字をセルに表示
           fill(0);
-          textSize(70);
+          textSize(60);
           for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
-              text(n[i][j], centerX[i]-20, centerY[j]+20);
+              text(n[i][j], centerX[i]-10, centerY[j]+30);
             }
           }
           text("Time:" + (millis() - baseTime)/1000.0, width/2 - 100, 570);
