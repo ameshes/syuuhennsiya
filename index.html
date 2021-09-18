@@ -1,0 +1,205 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Processing.js</title>
+    <script src="processing.js"></script>
+  </head>
+  <body>
+    <h1>Processing.js</h1>
+    <script type="text/processing">
+    int N = 5;
+    int count, k = 0;
+    int n [][] = new int [N][N];
+    float centerX [] = new float [5];
+    float centerY [] = new float [5];
+    PVector centerOfCell []= new PVector [25];
+    int oneCenterX [] = new int [9];
+    int oneCenterY [] = new int [9];
+
+    int touchedNum [] = new int [30];
+
+    int col, row;
+
+    int startTime;
+    int countDown;
+
+    int goalTime;
+    int baseTime;
+
+    boolean touchFlag [][] = new boolean [5][5];
+    boolean gameContinue;
+
+    void setup() {
+      size(1000, 1200);
+      background(255);
+      rectMode(CENTER);
+
+      touchedNum[0] = 1;
+      gameContinue = true;
+      startTime = 5;
+      countDown = 5;
+
+      //連番数字を配列に格納し，どのセルにも触れていない
+      for (int i = 0; i < n.length; i++) {
+        for (int j = 0; j < n.length; j++) {
+          n[i][j] = i*5 + (j+1);
+          touchFlag[i][j] = false;
+          //println(n[i][j]);
+        }
+      }
+
+      println();
+      //シャッフル
+      for (int i = 0; i < n.length; i++) {
+        for (int j = 0; j < n.length; j++) {
+          int rnd = (int)random(0, 5);
+          int rnd2 = (int)random(0, 5);
+
+          //n[i]とn[rnd]を入れ替える
+          int tmp = n[i][j];
+          n[i][j] = n[rnd][rnd2];
+          n[rnd][rnd2] = tmp;
+        }
+      }
+
+      //シャッフルできたか確認
+      for (int i = 0; i < n.length; i++) {
+        for (int j = 0; j < n.length; j++) {
+          //println(n[i][j]);
+        }
+      }
+
+      //セルの中心を取得
+      for (int i = 0; i < n.length; i++) {
+        centerX[i] = (( 1000*i + 1000*(i+1) )/5 )/2;
+        centerY[i] = (( 1000*i + 1000*(i+1) )/5 )/2;
+        //println(centerX[i], centerY[i]);
+      }
+
+      //一桁になってるセル番地を取得
+      for (int i = 0; i < n.length; i++) {
+        for (int j = 0; j < n.length; j++) {
+          if (n[i][j] < 10) {
+            oneCenterX[count] = i;
+            oneCenterY[count] = j;
+            //println(oneCenterX[count], oneCenterY[count]);
+            count++;
+          }
+        }
+      }
+      /*
+      //一桁になってる番号だけを選んで右にずらしたい
+       for (int i = 0; i < n.length; i++) {
+       for (int j = 0; j < n.length; j++) {
+       if (i == oneCenterX[i] && j == oneCenterY[j] ) {
+       centerX[i] = centerX[i] - 30;
+       }
+       }
+       }
+       */
+    }
+
+
+    void draw() {
+      //カウントダウン
+      int ms = millis()/1000;
+      countDown = startTime - ms;
+      if (millis() < 5000) {
+        background(255);
+        fill(0);
+        textSize(800);
+        text(countDown, 1000/2 - 250, 1000/2 + 400);
+      }
+      if (millis() >= 5000 && millis() <= 5010) {
+        baseTime = millis();
+        println("計測を開始:" + baseTime);
+      }
+
+      if (millis() >= 5000) {
+        background(255);
+        //ゲーム開始・続行！
+        if (gameContinue == true) {
+
+          //縦横の線の描画
+          for (int i = 0; i < 5; i++) {
+            line(1000*i/5, 0, 1000*i/5, 1000);
+            line(0, 1000*i/5, 1000, 1000*i/5);
+          }
+          //セルをタッチしたら色が変わる
+
+          //セルに大きさに合わせて箱を配置
+          for (int i = 0; i < n.length; i++) {
+            for (int j = 0; j < n.length; j++) {
+              if (touchFlag[i][j] == true) {
+                fill(0, 0, 255);
+              } else {
+                fill(255, 255, 255);
+              }
+              rect(centerX[i], centerY[j], 1000/5 - 10, 1000/5 - 10);
+            }
+          }
+
+          //配列の数字をセルに表示
+          fill(0);
+          textSize(100);
+          for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
+              text(n[i][j], centerX[i]-65, centerY[j]+40);
+            }
+          }
+          text("Time:" + (millis() - baseTime)/1000.0, width/2 - 100, 1100);
+        }
+
+
+        //ゲーム終了…
+        if (gameContinue == false) {
+          background(255);
+          fill(255, 0, 0);
+          text("game over!!", 200, 300);
+          text("Restart Me! :)", 160, 500);
+        }
+        if (gameContinue == true && k >= 25) {
+          background(255);
+          text("Success!!", 300, 300);
+          text("Your Time: " + (goalTime - baseTime)/1000.0, width/2 - 450, 500);
+          textSize(70);
+          text("Answer the questionare!", 85, 700);
+          textSize(60);
+          text("Your classroom teacher", 85, 800);
+          text("send you a questionare form", 85, 880);
+          text("on your classroom Teams.", 85, 960);
+        }
+      }
+    }
+
+
+    void mouseClicked() {
+      //セルをタッチしたら旗があがる
+      if (k <= 24 && millis() >= 5000) {
+        col = floor(mouseX / (width/5));
+        row = floor(mouseY / (width/5));
+        touchFlag[col][row] = true;
+
+        //タッチされたセルの番号を取得
+        if (touchFlag[col][row] == true) {
+          touchedNum[k] = n[col][row];
+        }
+        //println(k, touchedNum[k]);
+        if (k+1 == touchedNum[k]) {
+          println("good!!");
+        } else {
+          gameContinue = false;
+        }
+        k += 1;
+      }
+
+      if (k == 25) {
+        goalTime = millis();
+        k = 26;
+      }
+    }
+    </script>
+    <canvas></canvas>
+  </body>
+</html>
