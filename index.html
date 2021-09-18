@@ -179,7 +179,7 @@
       //セルをタッチしたら旗があがる
       if (k <= 24 && millis() >= 5000) {
         col = floor(mouseX / (width/5));
-        row = floor(mouseY / (width/5));
+        row = floor(mouseY / (500/5));
         touchFlag[col][row] = true;
 
         //タッチされたセルの番号を取得
