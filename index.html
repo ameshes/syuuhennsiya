@@ -31,7 +31,7 @@
     boolean gameContinue;
 
     void setup() {
-      size(1000, 1200);
+      size(900, 900);
       background(255);
       rectMode(CENTER);
 
@@ -72,8 +72,8 @@
 
       //セルの中心を取得
       for (int i = 0; i < n.length; i++) {
-        centerX[i] = (( 1000*i + 1000*(i+1) )/5 )/2;
-        centerY[i] = (( 1000*i + 1000*(i+1) )/5 )/2;
+        centerX[i] = (( 900*i + 900*(i+1) )/5 )/2;
+        centerY[i] = (( 900*i + 900*(i+1) )/5 )/2;
         //println(centerX[i], centerY[i]);
       }
 
@@ -109,7 +109,7 @@
         background(255);
         fill(0);
         textSize(800);
-        text(countDown, 1000/2 - 250, 1000/2 + 400);
+        text(countDown, 900/2 - 250, 900/2 + 400);
       }
       if (millis() >= 5000 && millis() <= 5010) {
         baseTime = millis();
@@ -123,8 +123,8 @@
 
           //縦横の線の描画
           for (int i = 0; i < 5; i++) {
-            line(1000*i/5, 0, 1000*i/5, 1000);
-            line(0, 1000*i/5, 1000, 1000*i/5);
+            line(900*i/5, 0, 900*i/5, 900);
+            line(0, 900*i/5, 900, 900*i/5);
           }
           //セルをタッチしたら色が変わる
 
@@ -136,7 +136,7 @@
               } else {
                 fill(255, 255, 255);
               }
-              rect(centerX[i], centerY[j], 1000/5 - 10, 1000/5 - 10);
+              rect(centerX[i], centerY[j], 900/5 - 10, 900/5 - 10);
             }
           }
 
@@ -148,7 +148,7 @@
               text(n[i][j], centerX[i]-65, centerY[j]+40);
             }
           }
-          text("Time:" + (millis() - baseTime)/1000.0, width/2 - 100, 1100);
+          text("Time:" + (millis() - baseTime)/1000.0, width/2 - 100, 880);
         }
 
 
