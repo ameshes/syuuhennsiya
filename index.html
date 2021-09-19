@@ -13,7 +13,7 @@ const n = [];
 const centerX = [];
 const centerY = [];
 
-const countDownMax = 4;
+const countDownMax = 3;
 
 let countDown = 5;
 let startTime = 5;
@@ -148,7 +148,7 @@ function draw() {
 
 //タッチ操作
 function mouseClicked(){
-  if (k <= 24 && millis() >= countDownMax) {
+  if (k <= 24 && millis() >= countDownMax*1000) {
     
   　//タッチしたセルはどこか
     col = floor(mouseX / (width/5));
@@ -167,17 +167,17 @@ function mouseClicked(){
     } else {
       gameContinue = false;
     }
-   
-    if (k == 25) {
-      goalTime = millis();
-      k = 26;
-    }
  
   }
-  if (k == 3) {
+   if (k == 25) {
+      goalTime = millis();
+  }
+  if (k == 26) {
       link("https://forms.office.com/r/UfqMUefSWj");
   }
-  k += 1;
+  if (millis() >= countDownMax*1000) {
+    k += 1;
+  }
 }
 function link(url, winName, options) {
   winName && open(url, winName, options) || (location = url);
