@@ -130,17 +130,12 @@ function draw() {
     }
     
     //成功！
-    if (gameContinue == true && k >= 2) {
+    if (gameContinue == true && k >= 25) {
       background(255);
       textSize(70);
       text("ゲームクリア！", 300, 300);
-      text("あなたのタイム：" + (goalTime - baseTime)/1000.0, width/2 - 450, 500);
-      textSize(70);
-      text("アンケートに答えてね！", 85, 700);
-      textSize(60);
-      text("", 85, 800);
-      text("send you a questionare form", 85, 880);
-      text("on your classroom Teams.", 85, 960);
+      text("あなたのタイム：" + (goalTime - baseTime), width/2 - 450, 500);
+      text("アンケートに答えてね！", 85, 600);
     }
     
   }
@@ -169,10 +164,10 @@ function mouseClicked(){
     }
  
   }
-   if (k == 2) {
+   if (k == 25) {
       goalTime = millis();
   }
-  if (k == 3) {
+  if (k == 26) {
       link("https://forms.office.com/r/UfqMUefSWj");
   }
   if (millis() >= countDownMax*1000) {
