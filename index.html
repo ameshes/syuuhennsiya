@@ -8,7 +8,7 @@
   <body>
     <h1>挑戦！周辺視野ゲーム　あなたは何秒でクリアできる？</h1>
     <script>
-     const N = 5;
+    const N = 5;
 const n = [];
 const centerX = [];
 const centerY = [];
@@ -137,10 +137,16 @@ function draw() {
     }
     
     //成功！
-    if (gameContinue == true && k >= 25) {
+    if (gameContinue == true && k >= 2) {
       background(255);
+      noStroke(0);
+      fill(0,50);
+      rect(width/2 + 10,height/5 + 10,width*4/5,120);
+      
+      stroke(0);
       fill(255,255,200);
       rect(width/2,height/5,width*4/5,120);
+      
       fill(0);
       textSize(60);
       text("アンケートに答える", 80, 165);
