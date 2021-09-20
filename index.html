@@ -134,6 +134,7 @@ function draw() {
       textSize(70);
       text("残念でした～!!", 200, 300);
       text("もう一度！(^_^)/~", 160, 500);
+      link2("https://ameshes.github.io/syuuhennsiya/");
     }
     
     //成功！
@@ -198,6 +199,9 @@ function mouseClicked(){
   }
 }
 function link(url, winName, options) {
+  winName && open(url, winName, options) || (location = url);
+}
+function link2(url, winName, options) {
   winName && open(url, winName, options) || (location = url);
 }
     </script>
