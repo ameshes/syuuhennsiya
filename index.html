@@ -131,10 +131,10 @@ function draw() {
     if (gameContinue == false) {
       background(255);
       fill(255, 0, 0);
-      textSize(70);
-      text("残念でした～!!", 200, 300);
+      textSize(60);
+      text("残念でした～!!", 160, 300);
+      text("クリックして", 160, 400);
       text("もう一度！(^_^)/~", 160, 500);
-      link2("https://ameshes.github.io/syuuhennsiya/");
     }
     
     //成功！
@@ -166,6 +166,9 @@ function draw() {
 
 //タッチ操作
 function mouseClicked(){
+  if (gameContinue == false) {
+    link2("https://ameshes.github.io/syuuhennsiya/");
+  }
   if (k <= 23 && millis() >= countDownMax*1000) {
     
   　//タッチしたセルはどこか
